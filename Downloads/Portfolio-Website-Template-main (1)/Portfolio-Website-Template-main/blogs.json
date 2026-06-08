@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Blog 1 - Data Engineering",
+    "description": "This article covers the fundamentals of data engineering, including data pipelines, ETL, storage, and tools.",
+    "image": "images/blog_1.jpg",
+    "url": "blog1.html"
+  },
+  {
+    "title": "Blog 2 - SQL Performance Optimization",
+    "description": "Improve SQL query performance with indexing, proper joins, and query plan analysis.",
+    "image": "images/blog_2.jpg",
+    "url": "blog2.html"
+  },
+  {
+    "title": "Blog 3 - Cloud Data Solutions",
+    "description": "A comparison of AWS and Azure services for data storage, processing, and analytics architectures.",
+    "image": "images/blog_3.jpg",
+    "url": "blog3.html"
+  }
+]
