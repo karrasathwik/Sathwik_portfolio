@@ -339,7 +339,7 @@
 				<div class="col-md-6">
 					<div class="resume-wrap ftco-animate">
 						<span class="date">2018-2021</span>
-						<h2>Senior Data Analyst</h2>
+						<h2> Data Analyst</h2>
 						<span class="position">iQuanti</span>
 						<p class="mt-4">iQuanti is a data-driven digital marketing analytics and solutions company, helps top 100 global brands. 
 							<ul>
@@ -580,6 +580,77 @@
   <script src="js/scrollax.min.js"></script>
   
   <script src="js/main.js"></script>
+ <!-- ===================== WELCOME VOICE OVERLAY ===================== -->
+<div id="welcome-overlay" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.88);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+">
+  <h1 style="color: #ffbd39; font-family: 'Poppins', sans-serif; font-size: 2.5rem; margin-bottom: 1rem;">
+    Welcome 👋
+  </h1>
+  <p style="color: #fff; font-family: 'Poppins', sans-serif; font-size: 1.2rem; margin-bottom: 2rem;">
+    Click anywhere to enter
+  </p>
+  <div style="
+    width: 75px; height: 75px;
+    border-radius: 50%;
+    background: #ffbd39;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    animation: pulse 1.5s infinite;
+  ">🔊</div>
+</div>
+
+<style>
+  @keyframes pulse {
+    0%   { transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,189,57,0.6); }
+    50%  { transform: scale(1.12); box-shadow: 0 0 0 15px rgba(255,189,57,0); }
+    100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(255,189,57,0); }
+  }
+</style>
+
+<script>
+  const overlay = document.getElementById('welcome-overlay');
+
+  overlay.addEventListener('click', function () {
+    window.speechSynthesis.cancel();
+
+    const msg = new SpeechSynthesisUtterance();
+    msg.text = "Hi! Welcome to Sathwik's portfolio!";
+    msg.lang = 'en-GB';
+    msg.rate = 0.92;
+    msg.pitch = 1.05;
+    msg.volume = 1;
+
+    function speak() {
+      const voices = window.speechSynthesis.getVoices();
+      const preferred = voices.find(v => v.lang === 'en-GB') ||
+                        voices.find(v => v.lang === 'en-US') ||
+                        voices.find(v => v.lang.startsWith('en'));
+      if (preferred) msg.voice = preferred;
+      window.speechSynthesis.speak(msg);
+    }
+
+    if (window.speechSynthesis.getVoices().length > 0) {
+      speak();
+    } else {
+      window.speechSynthesis.onvoiceschanged = speak;
+    }
+
+    overlay.style.transition = 'opacity 0.7s ease';
+    overlay.style.opacity = '0';
+    setTimeout(() => overlay.remove(), 700);
+  });
+</script>
+<!-- ===================== END WELCOME VOICE OVERLAY ===================== -->
     
   </body>
 </html>
