@@ -146,7 +146,7 @@
 	          	</div>
 		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 		          	<div class="text">
-		          		<span class="subheading">Hello!</span>
+		          		<span class="subheading">Hello</span>
 			            <h1 class="mb-4 mt-3">I'm <span>Sathwik Karra</span></h1>
 
 						<!-- Element to contain animated typing -->
@@ -161,26 +161,47 @@
 						const typingTexts = [
 						' Data Engineer  ',
 						'Data Analyst  ',
+						'ETL Developer '
 						];
+						let textIndex = 0;
+						let charIndex = 0;
+						let isDeleting = false;
 
-						// Create a function to display the typing animation for a given text
-						function playTypingAnimation(text) {
-						// Loop through each character and add it to the element
-						for (let i = 0; i < text.length; i++) {
-							setTimeout(() => {
-							typingAnimationElement.textContent += text[i];
-							}, i * 200); // Increase the delay to slow down the typing animation
+						function typeEffect() {
+
+    						const currentText = typingTexts[textIndex];
+							if (!isDeleting) {
+								// Typing characters
+        						typingAnimationElement.textContent = currentText.substring(0, charIndex + 1);
+								charIndex++;
+							// Finished typing
+								if (charIndex === currentText.length) {
+									isDeleting = true;
+									// Wait before deleting
+									setTimeout(typeEffect, 1500);
+									return;
+								}
+							} else {
+
+
+        						// Removing characters
+        						typingAnimationElement.textContent = currentText.substring(0, charIndex - 1)
+								charIndex--;
+								// Finished deleting
+								if (charIndex === 0) {
+									isDeleting = false;
+									// Move to next word
+									textIndex++;
+									if (textIndex === typingTexts.length) {
+                						textIndex = 0;
+									}
+								}
+							}
+							 // Typing speed
+    						let speed = isDeleting ? 80 : 120;
+							setTimeout(typeEffect, speed);
 						}
-
-						// Once the animation is complete, reset the text and start over
-						setTimeout(() => {
-							typingAnimationElement.textContent = '';
-							playTypingAnimation(typingTexts[(typingTexts.indexOf(text) + 1) % typingTexts.length]);
-						}, text.length * 200);
-						}
-
-						// Start the typing animation loop
-						playTypingAnimation(typingTexts[0]);
+						typeEffect();
 
 						</script>
 
